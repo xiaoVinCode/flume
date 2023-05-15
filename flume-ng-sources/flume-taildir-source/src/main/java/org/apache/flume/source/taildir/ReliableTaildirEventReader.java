@@ -251,7 +251,9 @@ public class ReliableTaildirEventReader implements ReliableEventReader {
           continue;
         }
         TailFile tf = tailFiles.get(inode);
-        if (tf == null || !tf.getPath().equals(f.getAbsolutePath())) {
+        // TODO TP判断是否是新文件，inode或者文件名不同就认为是新文件
+        // if (tf == null || !tf.getPath().equals(f.getAbsolutePath())) {
+        if (tf == null) {
           long startPos = skipToEnd ? f.length() : 0;
           tf = openFile(f, headers, inode, startPos);
         } else {
